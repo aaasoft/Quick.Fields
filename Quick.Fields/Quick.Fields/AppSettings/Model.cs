@@ -8,6 +8,7 @@ namespace Quick.Fields.AppSettings
 {
     public class Model
     {
+        public const string APPSETTINGS_JSON_FILENAME = "appsettings.json";
         public FieldForGet[] Fields { get; set; }
 
         public string GetValue(string fieldId)
@@ -20,15 +21,33 @@ namespace Quick.Fields.AppSettings
             return null;
         }
 
+        public void SetValue(string fieldId, string value)
+        {
+            foreach (var field in Fields)
+                if (field.Id == fieldId)
+                    field.Value = value;
+        }
+
         public static Model Load()
         {
-            return Load("appsettings.json");
+            return Load(APPSETTINGS_JSON_FILENAME);
         }
 
         public static Model Load(string path)
         {
             var content = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<Model>(content);
+        }
+
+        public void Save()
+        {
+            Save(APPSETTINGS_JSON_FILENAME, Encoding.UTF8);
+        }
+
+        public void Save(string path, Encoding encoding)
+        {
+            var content = JsonConvert.SerializeObject(this);
+            File.WriteAllText(path, content, encoding);
         }
     }
 }
