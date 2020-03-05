@@ -11,6 +11,10 @@ namespace Quick.Fields
         /// </summary>
         Button,
         /// <summary>
+        /// 消息对话框
+        /// </summary>
+        MessageBox,
+        /// <summary>
         /// 弹出提示框
         /// </summary>
         Toast,
@@ -18,6 +22,10 @@ namespace Quick.Fields
         /// 显示提示框
         /// </summary>
         Alert,
+        /// <summary>
+        /// 显示图片
+        /// </summary>
+        Image,
         /// <summary>
         /// 分组盒
         /// </summary>
