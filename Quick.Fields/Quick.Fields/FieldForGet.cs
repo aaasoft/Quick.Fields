@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace Quick.Fields
         /// <summary>
         /// 类型
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public FieldType Type { get; set; } = FieldType.InputText;
         /// <summary>
         /// 只读，当Type为Button、Alert或者Toast时，true代表danger，false代表primary
