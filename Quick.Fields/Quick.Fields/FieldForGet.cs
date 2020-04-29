@@ -39,6 +39,11 @@ namespace Quick.Fields
         /// </summary>
         public IDictionary<string, string> Options { get; set; }
         /// <summary>
+        /// 枚举的编号是否使用整数值
+        /// </summary>
+        [JsonIgnore]
+        public bool OptionsEnumIdUseIntValue { get; set; } = true;
+        /// <summary>
         /// 根据枚举类型设置Options参数的值
         /// </summary>
         public Type OptionsEnum
@@ -68,7 +73,10 @@ namespace Quick.Fields
                         }
                     }
 #endif
-                    dict[Convert.ToInt32(e).ToString()] = name;
+                    var enumKey = key;
+                    if (OptionsEnumIdUseIntValue)
+                        enumKey = Convert.ToInt32(e).ToString();
+                    dict[enumKey] = name;
                 }
                 Options = dict;
             }

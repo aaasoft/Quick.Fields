@@ -38,7 +38,8 @@ namespace Quick.Fields.AppSettings
         {
             JObject jobj = new JObject();
             foreach (var field in Fields)
-                jobj[field.Id] = field.Value;
+                if (!string.IsNullOrEmpty(field.Id))
+                    jobj[field.Id] = field.Value;
             return jobj.ToObject<T>();
         }
 
