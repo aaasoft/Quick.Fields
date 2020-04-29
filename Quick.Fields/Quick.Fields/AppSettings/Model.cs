@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,19 @@ namespace Quick.Fields.AppSettings
             foreach (var field in Fields)
                 if (field.Id == fieldId)
                     field.Value = value;
+        }
+
+        /// <summary>
+        /// 转换为指定类型的对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T Convert<T>()
+        {
+            JObject jobj = new JObject();
+            foreach (var field in Fields)
+                jobj[field.Id] = field.Value;
+            return jobj.ToObject<T>();
         }
 
         public static Model Load()

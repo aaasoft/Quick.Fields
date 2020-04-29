@@ -39,6 +39,30 @@ namespace Quick.Fields
         /// </summary>
         public IDictionary<string, string> Options { get; set; }
         /// <summary>
+        /// 根据枚举类型设置Options参数的值
+        /// </summary>
+        public Type OptionsEnum
+        {
+            set
+            {
+                var type = value;
+                if (type == null)
+                    return;
+#if !NETSTANDARD1_5
+                if (!type.IsEnum)
+                    return;
+#endif
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                foreach (var name in Enum.GetNames(type))
+                {
+                    var e = Enum.Parse(type, name);
+                    dict[Convert.ToInt32(e).ToString()] = name;
+                }
+                Options = dict;
+            }
+        }
+
+        /// <summary>
         /// 验证用正则表达式
         /// </summary>
         public string RegularExpression { get; set; }
