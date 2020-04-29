@@ -53,9 +53,21 @@ namespace Quick.Fields
                     return;
 #endif
                 Dictionary<string, string> dict = new Dictionary<string, string>();
-                foreach (var name in Enum.GetNames(type))
+                foreach (var key in Enum.GetNames(type))
                 {
-                    var e = Enum.Parse(type, name);
+                    var e = Enum.Parse(type, key);
+                    var name = key;
+#if !NETSTANDARD1_5
+                    var attrs = type.GetMember(key)[0].GetCustomAttributes(false);
+                    foreach(var attr in attrs)
+                    {
+                        if(attr is System.ComponentModel.DescriptionAttribute)
+                        {
+                            name = ((System.ComponentModel.DescriptionAttribute)attr).Description;
+                            break;
+                        }
+                    }
+#endif
                     dict[Convert.ToInt32(e).ToString()] = name;
                 }
                 Options = dict;
