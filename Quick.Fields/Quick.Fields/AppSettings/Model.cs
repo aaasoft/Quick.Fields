@@ -10,8 +10,8 @@ namespace Quick.Fields.AppSettings
     public class Model
     {
         public const string APPSETTINGS_JSON_FILENAME = "appsettings.json";
-        public FieldForGet[] Fields { get; set; }
-
+        public JObject Raw { get; private set; }
+        public FieldForGet[] Fields { get; set; }        
         public string GetValue(string fieldId)
         {
             if (Fields == null || Fields.Length == 0)
@@ -51,7 +51,9 @@ namespace Quick.Fields.AppSettings
         public static Model Load(string path)
         {
             var content = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<Model>(content);
+            var model = JsonConvert.DeserializeObject<Model>(content);
+            model.Raw = JObject.Parse(content);
+            return model;
         }
 
         public void Save()
