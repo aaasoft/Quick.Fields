@@ -11,22 +11,50 @@ namespace Quick.Fields.AppSettings
     {
         public const string APPSETTINGS_JSON_FILENAME = "appsettings.json";
         public JObject Raw { get; private set; }
-        public FieldForGet[] Fields { get; set; }        
+        public FieldForGet[] Fields { get; set; }
+
+        private FieldForGet findField(FieldForGet[] items, string fieldId)
+        {
+            if (items == null || fieldId == null)
+                return null;
+
+            foreach (var item in items)
+            {
+                if (fieldId == item.Id)
+                    return item;
+                var subItem = findField(item.Children, fieldId);
+                if (subItem != null)
+                    return subItem;
+            }
+            return null;
+        }
+
         public string GetValue(string fieldId)
         {
-            if (Fields == null || Fields.Length == 0)
+            var field = findField(Fields, fieldId);
+            if (field == null)
                 return null;
-            foreach (var field in Fields)
-                if (field.Id == fieldId)
-                    return field.Value;
-            return null;
+            return field.Value;
         }
 
         public void SetValue(string fieldId, string value)
         {
-            foreach (var field in Fields)
-                if (field.Id == fieldId)
-                    field.Value = value;
+            var field = findField(Fields, fieldId);
+            if (field == null)
+                return;
+            field.Value = value;
+        }
+
+        private void fillJObjectValue(FieldForGet[] items, JObject jobj)
+        {
+            if (items == null || items.Length == 0)
+                return;
+            foreach (var field in items)
+            {
+                if (!string.IsNullOrEmpty(field.Id))
+                    jobj[field.Id] = field.Value;
+                fillJObjectValue(field.Children, jobj);
+            }
         }
 
         /// <summary>
@@ -37,9 +65,7 @@ namespace Quick.Fields.AppSettings
         public T Convert<T>()
         {
             JObject jobj = new JObject();
-            foreach (var field in Fields)
-                if (!string.IsNullOrEmpty(field.Id))
-                    jobj[field.Id] = field.Value;
+            fillJObjectValue(Fields, jobj);
             return jobj.ToObject<T>();
         }
 

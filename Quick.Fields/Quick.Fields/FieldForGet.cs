@@ -7,8 +7,12 @@ using System.Text;
 
 namespace Quick.Fields
 {
-    public class FieldForGet : FieldForPost, INotifyPropertyChanged
+    public partial class FieldForGet : INotifyPropertyChanged
     {
+        /// <summary>
+        /// 编号
+        /// </summary>
+        public string Id { get; set; }
         /// <summary>
         /// 名称
         /// </summary>
@@ -16,6 +20,7 @@ namespace Quick.Fields
         /// <summary>
         /// 描述
         /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; set; }
         /// <summary>
         /// 类型
@@ -23,104 +28,37 @@ namespace Quick.Fields
         [JsonConverter(typeof(StringEnumConverter))]
         public FieldType Type { get; set; } = FieldType.InputText;
         /// <summary>
-        /// 只读，当Type为Button、Alert或者Toast时，true代表danger，false代表primary
+        /// 宽度
         /// </summary>
-        public bool ReadOnly { get; set; } = false;
-        /// <summary>
-        /// 允许为空
-        /// </summary>
-        public bool AllowBlank { get; set; } = true;
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int? Width { get; set; }
         /// <summary>
         /// 当值改变时，是否提交
         /// </summary>
-        public bool PostOnChanged { get; set; } = false;
-        /// <summary>
-        /// 选择输入控件的选择项字典
-        /// </summary>
-        public IDictionary<string, string> Options { get; set; }
-        /// <summary>
-        /// 枚举的编号是否使用整数值
-        /// </summary>
-        [JsonIgnore]
-        public bool OptionsEnumIdUseIntValue { get; set; } = true;
-        /// <summary>
-        /// 根据枚举类型设置Options参数的值
-        /// </summary>
-        public Type OptionsEnum
-        {
-            set
-            {
-                var type = value;
-                if (type == null)
-                    return;
-#if !NETSTANDARD1_5
-                if (!type.IsEnum)
-                    return;
-#endif
-                Dictionary<string, string> dict = new Dictionary<string, string>();
-                foreach (var key in Enum.GetNames(type))
-                {
-                    var e = Enum.Parse(type, key);
-                    var name = key;
-#if !NETSTANDARD1_5
-                    var attrs = type.GetMember(key)[0].GetCustomAttributes(false);
-                    foreach(var attr in attrs)
-                    {
-                        if(attr is System.ComponentModel.DescriptionAttribute)
-                        {
-                            name = ((System.ComponentModel.DescriptionAttribute)attr).Description;
-                            break;
-                        }
-                    }
-#endif
-                    var enumKey = key;
-                    if (OptionsEnumIdUseIntValue)
-                        enumKey = Convert.ToInt32(e).ToString();
-                    dict[enumKey] = name;
-                }
-                Options = dict;
-            }
-        }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public bool? PostOnChanged { get; set; }
 
-        /// <summary>
-        /// 验证用正则表达式
-        /// </summary>
-        public string RegularExpression { get; set; }
-
-        /// <summary>
-        /// 验证消息
-        /// </summary>
-        [JsonIgnore]
-        public string ValidationMessage { get; private set; }
-
+        private string _Value;
         /// <summary>
         /// 值
         /// </summary>
-        public override string Value
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string Value
         {
-            get { return base.Value; }
+            get { return _Value; }
             set
             {
-                base.Value = value;
-                ValidationMessage = validate();
+                _Value = value;
+                Input_ValidationMessage = validate();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
             }
         }
 
-        private string validate()
-        {
-            //验证是否为空
-            if (!AllowBlank && string.IsNullOrEmpty(Value))
-                return $"字段[{Name}]的值不能为空";
-            //验证是否匹配正则表达式
-            if (!string.IsNullOrEmpty(RegularExpression))
-            {
-                var regex = new System.Text.RegularExpressions.Regex(RegularExpression);
-                if (!regex.IsMatch(Value))
-                    return $"字段[{Name}]的值格式不正确";
-            }
-            return null;
-        }
+        /// <summary>
+        /// 子字段，当类型为容器时有效
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public FieldForGet[] Children { get; set; }
 
         /// <summary>
         /// 属性改变时

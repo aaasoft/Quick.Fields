@@ -27,9 +27,17 @@ namespace Quick.Fields
         /// </summary>
         Image,
         /// <summary>
-        /// 分组盒
+        /// 分组容器控件
         /// </summary>
-        GroupBox,
+        ContainerGroup,
+        /// <summary>
+        /// 标签容器控件，子控件为GroupBox类型
+        /// </summary>
+        ContainerTab,
+        /// <summary>
+        /// 拆分容器控件，子控件为GroupBox类型
+        /// </summary>
+        ContainerSplit,
         /// <summary>
         /// 隐藏输入控件
         /// </summary>
@@ -53,6 +61,10 @@ namespace Quick.Fields
         /// <summary>
         /// 选择输入控件
         /// </summary>
-        InputSelect
+        InputSelect,
+        /// <summary>
+        /// 选择文件控件
+        /// </summary>
+        InputFile
     }
 }
