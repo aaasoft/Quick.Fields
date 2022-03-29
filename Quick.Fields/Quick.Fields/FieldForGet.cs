@@ -10,6 +10,7 @@ namespace Quick.Fields
 {
     public partial class FieldForGet : INotifyPropertyChanged
     {
+
         /// <summary>
         /// 编号
         /// </summary>
@@ -66,14 +67,24 @@ namespace Quick.Fields
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// 转换为FieldForPost类型的实例
+        /// </summary>
+        /// <returns></returns>
         public FieldForPost ToPost()
         {
-            return new FieldForPost()
+            var model = new FieldForPost()
             {
                 Id = Id,
-                Value = Value,
-                Children = Children?.Select(t => t.ToPost()).ToArray()
+                Value = Value
             };
+            model.Children = Children?.Select(t =>
+            {
+                var child = t.ToPost();
+                child.Parent = model;
+                return child;
+            }).ToArray();
+            return model;
         }
     }
 }
