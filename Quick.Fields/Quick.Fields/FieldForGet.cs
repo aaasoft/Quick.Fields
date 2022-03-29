@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 
 namespace Quick.Fields
@@ -64,5 +65,15 @@ namespace Quick.Fields
         /// 属性改变时
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public FieldForPost ToPost()
+        {
+            return new FieldForPost()
+            {
+                Id = Id,
+                Value = Value,
+                Children = Children?.Select(t => t.ToPost()).ToArray()
+            };
+        }
     }
 }
