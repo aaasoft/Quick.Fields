@@ -27,6 +27,10 @@ namespace Quick.Fields
         /// </summary>
         Image,
         /// <summary>
+        /// 分页器
+        /// </summary>
+        Pager,
+        /// <summary>
         /// 分组容器控件
         /// </summary>
         ContainerGroup,
