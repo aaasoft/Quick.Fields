@@ -7,6 +7,12 @@ namespace Quick.Fields
     public enum FieldType
     {
         /// <summary>
+        /// 分组盒，已过时
+        /// </summary>
+        [Obsolete]
+        GroupBox,
+
+        /// <summary>
         /// 按钮
         /// </summary>
         Button,
