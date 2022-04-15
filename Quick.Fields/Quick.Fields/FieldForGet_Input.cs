@@ -16,12 +16,12 @@ namespace Quick.Fields
         /// 输入控件是否只读，当Type为Input时有效
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Input_ReadOnly { get; set; } = false;
+        public bool? Input_ReadOnly { get; set; }
         /// <summary>
         /// 输入控件是否允许为空，当Type为Input时有效
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Input_AllowBlank { get; set; } = true;
+        public bool? Input_AllowBlank { get; set; }
         /// <summary>
         /// 验证消息
         /// </summary>
