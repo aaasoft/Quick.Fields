@@ -43,6 +43,38 @@ namespace Quick.Fields
         /// </summary>
         ContainerSplit,
         /// <summary>
+        /// 表格容器控件，子控件为ContainerTableTr类型
+        /// </summary>
+        ContainerTable,
+        /// <summary>
+        /// 表格容器控件TR，子控件为ContainerTableTh或ContainerTableTd类型
+        /// </summary>
+        ContainerTableTr,
+        /// <summary>
+        /// 表格容器控件TH
+        /// </summary>
+        ContainerTableTh,
+        /// <summary>
+        /// 表格容器控件TD
+        /// </summary>
+        ContainerTableTd,
+        /// <summary>
+        /// HTML内容划分元素标签
+        /// </summary>
+        HtmlDiv,
+        /// <summary>
+        /// HTML段落标签
+        /// </summary>
+        HtmlParagraph,
+        /// <summary>
+        /// HTML预格式化标签
+        /// </summary>
+        HtmlPre,
+        /// <summary>
+        /// HTML短语标签
+        /// </summary>
+        HtmlSpan,
+        /// <summary>
         /// 隐藏输入控件
         /// </summary>
         InputHidden,
