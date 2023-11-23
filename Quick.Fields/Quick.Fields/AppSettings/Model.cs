@@ -50,7 +50,23 @@ namespace Quick.Fields.AppSettings
             foreach (var field in items)
             {
                 if (!string.IsNullOrEmpty(field.Id))
+                {
                     jobj[field.Id] = field.Value;
+                    //如果是InputSelect类型
+                    if (field.Type == FieldType.InputSelect)
+                    {
+                        //如果能转换为布尔类型
+                        if (bool.TryParse(field.Value, out var b))
+                            jobj[field.Id] = b;
+                    }
+                    //如果是数字类型
+                    else if(field.Type == FieldType.InputNumber)
+                    {
+                        //如果能转换为数字
+                        if(decimal.TryParse(field.Value,out var d))
+                            jobj[field.Id] = d;
+                    }
+                }
                 fillJObjectValue(field.Children, jobj);
             }
         }
