@@ -28,8 +28,8 @@ namespace Quick.Fields
         /// <summary>
         /// 类型
         /// </summary>
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public FieldType Type { get; set; } = FieldType.InputText;
+        [JsonConverter(typeof(JsonStringEnumConverter<FieldType>))]
+        public FieldType Type { get; set; } = FieldType.InputText;        
         /// <summary>
         /// 宽度
         /// </summary>
