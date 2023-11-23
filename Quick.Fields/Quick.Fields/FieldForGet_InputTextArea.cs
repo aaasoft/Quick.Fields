@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +9,6 @@ namespace Quick.Fields
         /// <summary>
         /// 输入控件验证用正则表达式，当Type为Input时有效
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int? InputTextArea_Rows { get; set; }
     }
 }

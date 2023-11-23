@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
@@ -25,12 +22,10 @@ namespace Quick.Fields
         /// <summary>
         /// 值
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public virtual string Value { get; set; }
         /// <summary>
         /// 子字段
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public FieldForPost[] Children { get; set; }
 
         /// <summary>

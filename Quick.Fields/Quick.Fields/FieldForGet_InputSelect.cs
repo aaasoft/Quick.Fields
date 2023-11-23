@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
@@ -11,7 +10,6 @@ namespace Quick.Fields
         /// <summary>
         /// 选择输入控件的选择项字典
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public IDictionary<string, string> InputSelect_Options { get; set; }
         /// <summary>
         /// 枚举的编号是否使用整数值

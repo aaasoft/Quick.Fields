@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
@@ -27,29 +24,25 @@ namespace Quick.Fields
         /// <summary>
         /// 描述
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public FieldType Type { get; set; } = FieldType.InputText;
         /// <summary>
         /// 宽度
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int? Width { get; set; }
         /// <summary>
         /// 当值改变时，是否提交
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public bool? PostOnChanged { get; set; }
 
         private string _Value;
         /// <summary>
         /// 值
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Value
         {
             get { return _Value; }
@@ -65,15 +58,15 @@ namespace Quick.Fields
         /// <summary>
         /// 子字段，当类型为容器时有效
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public FieldForGet[] Children
         {
             get { return _Children; }
             set
             {
                 _Children = value;
-                foreach (var item in value)
-                    item.Parent = this;
+                if (value != null)
+                    foreach (var item in value)
+                        item.Parent = this;
             }
         }
 

@@ -1,16 +1,14 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace Quick.Fields.AppSettings
 {
     public class Model
     {
         public const string APPSETTINGS_JSON_FILENAME = "appsettings.json";
-        public JObject Raw { get; private set; }
+        public JsonObject Raw { get; private set; }
         public FieldForGet[] Fields { get; set; }
 
         private FieldForGet findField(FieldForGet[] items, string fieldId)
@@ -45,7 +43,7 @@ namespace Quick.Fields.AppSettings
             field.Value = value;
         }
 
-        private void fillJObjectValue(FieldForGet[] items, JObject jobj)
+        private void fillJObjectValue(FieldForGet[] items, JsonObject jobj)
         {
             if (items == null || items.Length == 0)
                 return;
@@ -64,9 +62,9 @@ namespace Quick.Fields.AppSettings
         /// <returns></returns>
         public T Convert<T>()
         {
-            JObject jobj = new JObject();
+            var jobj = new JsonObject();
             fillJObjectValue(Fields, jobj);
-            return jobj.ToObject<T>();
+            return jobj.Deserialize<T>();
         }
 
         public static Model Load()
@@ -77,8 +75,8 @@ namespace Quick.Fields.AppSettings
         public static Model Load(string path)
         {
             var content = File.ReadAllText(path);
-            var model = JsonConvert.DeserializeObject<Model>(content);
-            model.Raw = JObject.Parse(content);
+            var model = JsonSerializer.Deserialize<Model>(content);
+            model.Raw = JsonNode.Parse(content).AsObject();
             return model;
         }
 
@@ -89,7 +87,7 @@ namespace Quick.Fields.AppSettings
 
         public void Save(string path, Encoding encoding)
         {
-            var content = JsonConvert.SerializeObject(this);
+            var content = JsonSerializer.Serialize(this);
             File.WriteAllText(path, content, encoding);
         }
     }

@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
@@ -10,17 +7,14 @@ namespace Quick.Fields
         /// <summary>
         /// 输入控件验证用正则表达式，当Type为Input时有效
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Input_RegularExpression { get; set; }
         /// <summary>
         /// 输入控件是否只读，当Type为Input时有效
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public bool? Input_ReadOnly { get; set; }
         /// <summary>
         /// 输入控件是否允许为空，当Type为Input时有效
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public bool? Input_AllowBlank { get; set; }
         /// <summary>
         /// 验证消息
