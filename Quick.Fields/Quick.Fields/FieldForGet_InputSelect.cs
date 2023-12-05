@@ -35,15 +35,6 @@ namespace Quick.Fields
                 {
                     var e = Enum.Parse(type, key);
                     var name = key;
-                    var attrs = type.GetMember(key)[0].GetCustomAttributes(false);
-                    foreach (var attr in attrs)
-                    {
-                        if (attr is DescriptionAttribute)
-                        {
-                            name = ((DescriptionAttribute)attr).Description;
-                            break;
-                        }
-                    }
                     var enumKey = key;
                     if (InputSelect_OptionsEnumIdUseIntValue)
                         enumKey = Convert.ToInt32(e).ToString();

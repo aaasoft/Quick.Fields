@@ -2,9 +2,13 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace Quick.Fields.AppSettings
 {
+    [JsonSerializable(typeof(Model))]
+    internal partial class ModelSerializerContext : JsonSerializerContext { }
+
     public class Model
     {
         public const string APPSETTINGS_JSON_FILENAME = "appsettings.json";
@@ -60,10 +64,10 @@ namespace Quick.Fields.AppSettings
                             jobj[field.Id] = b;
                     }
                     //如果是数字类型
-                    else if(field.Type == FieldType.InputNumber)
+                    else if (field.Type == FieldType.InputNumber)
                     {
                         //如果能转换为数字
-                        if(decimal.TryParse(field.Value,out var d))
+                        if (decimal.TryParse(field.Value, out var d))
                             jobj[field.Id] = d;
                     }
                 }
@@ -76,11 +80,11 @@ namespace Quick.Fields.AppSettings
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Convert<T>()
+        public T Convert<T>(JsonSerializerContext jsonSerializerContext)
         {
             var jobj = new JsonObject();
             fillJObjectValue(Fields, jobj);
-            return jobj.Deserialize<T>();
+            return (T)jobj.Deserialize(typeof(T), jsonSerializerContext);
         }
 
         public static Model Load()
@@ -91,7 +95,7 @@ namespace Quick.Fields.AppSettings
         public static Model Load(string path)
         {
             var content = File.ReadAllText(path);
-            var model = JsonSerializer.Deserialize<Model>(content);
+            var model = (Model)JsonSerializer.Deserialize(content, typeof(Model), ModelSerializerContext.Default);
             model.Raw = JsonNode.Parse(content).AsObject();
             return model;
         }
@@ -103,7 +107,7 @@ namespace Quick.Fields.AppSettings
 
         public void Save(string path, Encoding encoding)
         {
-            var content = JsonSerializer.Serialize(this);
+            var content = JsonSerializer.Serialize(this, typeof(Model), ModelSerializerContext.Default);
             File.WriteAllText(path, content, encoding);
         }
     }
