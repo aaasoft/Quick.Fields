@@ -7,7 +7,8 @@ using System.Text.Json.Serialization;
 namespace Quick.Fields.AppSettings
 {
     [JsonSerializable(typeof(Model))]
-    public partial class ModelSerializerContext : JsonSerializerContext { }
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    internal partial class ModelSerializerContext : JsonSerializerContext { }
 
     public class Model
     {
@@ -98,6 +99,16 @@ namespace Quick.Fields.AppSettings
             var model = (Model)JsonSerializer.Deserialize(content, typeof(Model), ModelSerializerContext.Default);
             model.Raw = JsonNode.Parse(content).AsObject();
             return model;
+        }
+
+        public static Model FromJsonString(string json)
+        {
+            return (Model)JsonSerializer.Deserialize(json, typeof(Model), ModelSerializerContext.Default);
+        }
+
+        public string ToJsonString()
+        {
+            return JsonSerializer.Serialize(this, typeof(Model), ModelSerializerContext.Default);
         }
 
         public void Save()
