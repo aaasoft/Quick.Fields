@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace Quick.Fields.AppSettings
 {
     [JsonSerializable(typeof(Model))]
-    internal partial class ModelSerializerContext : JsonSerializerContext { }
+    public partial class ModelSerializerContext : JsonSerializerContext { }
 
     public class Model
     {
