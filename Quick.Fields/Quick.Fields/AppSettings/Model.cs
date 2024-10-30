@@ -8,7 +8,7 @@ namespace Quick.Fields.AppSettings
 {
     [JsonSerializable(typeof(Model))]
     [JsonSourceGenerationOptions(WriteIndented = true)]
-    internal partial class ModelSerializerContext : JsonSerializerContext { }
+    public partial class ModelSerializerContext : JsonSerializerContext { }
 
     public class Model
     {
