@@ -28,11 +28,11 @@ namespace Quick.Fields
         }
 
         /// <summary>
-        /// 获取字段的值
+        /// 获取字段
         /// </summary>
-        /// <param name="fieldId"></param>
+        /// <param name="fieldIds"></param>
         /// <returns></returns>
-        public string GetFieldValue(params string[] fieldIds)
+        public FieldForGet GetField(params string[] fieldIds)
         {
             var currentFields = Fields;
             FieldForGet currentField = null;
@@ -43,7 +43,27 @@ namespace Quick.Fields
                     return null;
                 currentFields = currentField.Children;
             }
-            return currentField?.Value;
+            return currentField;
+        }
+
+        /// <summary>
+        /// 获取字段的名称
+        /// </summary>
+        /// <param name="fieldId"></param>
+        /// <returns></returns>
+        public string GetFieldName(params string[] fieldIds)
+        {
+            return GetField(fieldIds)?.Name;
+        }
+
+        /// <summary>
+        /// 获取字段的值
+        /// </summary>
+        /// <param name="fieldId"></param>
+        /// <returns></returns>
+        public string GetFieldValue(params string[] fieldIds)
+        {
+            return GetField(fieldIds)?.Value;
         }
 
         private void fillJObjectValue(FieldForGet[] items, JsonObject jobj)
