@@ -13,9 +13,21 @@ namespace Quick.Fields
         /// </summary>
         public bool? Input_ReadOnly { get; set; }
         /// <summary>
+        /// 输入控件是否禁用，当Type为Input时有效
+        /// </summary>
+        public bool? Input_Disabled { get; set; }
+        /// <summary>
         /// 输入控件是否允许为空，当Type为Input时有效
         /// </summary>
         public bool? Input_AllowBlank { get; set; }
+        /// <summary>
+        /// 输入控件是否显示为大尺寸，当Type为Input时有效
+        /// </summary>
+        public bool? Input_IsLarge { get; set; }
+        /// <summary>
+        /// 输入控件是否显示为小尺寸，当Type为Input时有效
+        /// </summary>
+        public bool? Input_IsSmall { get; set; }
         /// <summary>
         /// 验证消息
         /// </summary>
