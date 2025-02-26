@@ -28,6 +28,7 @@ namespace Quick.Fields
         /// <summary>
         /// 主题
         /// </summary>
+        [JsonConverter(typeof(JsonStringEnumConverter<FieldTheme>))]
         public FieldTheme? Theme { get; set; }
         /// <summary>
         /// 类型
@@ -38,6 +39,46 @@ namespace Quick.Fields
         /// 宽度
         /// </summary>
         public int? Width { get; set; }
+        /// <summary>
+        /// 外边距
+        /// </summary>
+        public int? Margin { get; set; }
+        /// <summary>
+        /// 左外边距
+        /// </summary>
+        public int? MarginLeft { get; set; }
+        /// <summary>
+        /// 右外边距
+        /// </summary>
+        public int? MarginRight { get; set; }
+        /// <summary>
+        /// 上外边距
+        /// </summary>
+        public int? MarginTop { get; set; }
+        /// <summary>
+        /// 下外边距
+        /// </summary>
+        public int? MarginBottom { get; set; }
+        /// <summary>
+        /// 内边距
+        /// </summary>
+        public int? Padding { get; set; }
+        /// <summary>
+        /// 左内边距
+        /// </summary>
+        public int? PaddingLeft { get; set; }
+        /// <summary>
+        /// 右内边距
+        /// </summary>
+        public int? PaddingRight { get; set; }
+        /// <summary>
+        /// 上内边距
+        /// </summary>
+        public int? PaddingTop { get; set; }
+        /// <summary>
+        /// 下内边距
+        /// </summary>
+        public int? PaddingBottom { get; set; }
         /// <summary>
         /// 当值改变时，是否提交
         /// </summary>

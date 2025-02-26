@@ -43,9 +43,17 @@ namespace Quick.Fields
         /// </summary>
         ContainerSplit,
         /// <summary>
-        /// 表格容器控件，子控件为ContainerTableTr类型
+        /// 表格容器控件，子控件为ContainerTableHead、ContainerTableBody或者ContainerTableTr类型
         /// </summary>
         ContainerTable,
+        /// <summary>
+        /// 表格头容器控件，子控件为ContainerTableTr类型
+        /// </summary>
+        ContainerTableHead,
+        /// <summary>
+        /// 表格体容器控件，子控件为ContainerTableTr类型
+        /// </summary>
+        ContainerTableBody,
         /// <summary>
         /// 表格容器控件TR，子控件为ContainerTableTh或ContainerTableTd类型
         /// </summary>
