@@ -54,7 +54,10 @@ namespace Quick.Fields
             var currentNode = this;
             while (currentNode != null)
             {
-                idStack.Push(currentNode.Id);
+                if (!string.IsNullOrEmpty(currentNode.Id))
+                {
+                    idStack.Push(currentNode.Id);
+                }
                 currentNode = currentNode.Parent;
             }
             return idStack.ToArray();

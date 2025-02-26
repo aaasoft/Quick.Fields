@@ -28,13 +28,12 @@ namespace Quick.Fields
         /// <summary>
         /// 主题
         /// </summary>
-        [JsonConverter(typeof(JsonStringEnumConverter<FieldTheme>))]
-        public FieldTheme Theme { get; set; } = FieldTheme.Info;
+        public FieldTheme? Theme { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
         [JsonConverter(typeof(JsonStringEnumConverter<FieldType>))]
-        public FieldType Type { get; set; } = FieldType.InputText;        
+        public FieldType Type { get; set; } = FieldType.InputText;
         /// <summary>
         /// 宽度
         /// </summary>
@@ -126,7 +125,10 @@ namespace Quick.Fields
             var currentNode = this;
             while (currentNode != null)
             {
-                idStack.Push(currentNode.Id);
+                if (!string.IsNullOrEmpty(currentNode.Id))
+                {
+                    idStack.Push(currentNode.Id);
+                }
                 currentNode = currentNode.Parent;
             }
             return idStack.ToArray();
