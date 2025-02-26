@@ -26,6 +26,11 @@ namespace Quick.Fields
         /// </summary>
         public string Description { get; set; }
         /// <summary>
+        /// 主题
+        /// </summary>
+        [JsonConverter(typeof(JsonStringEnumConverter<FieldTheme>))]
+        public FieldTheme Theme { get; set; } = FieldTheme.Info;
+        /// <summary>
         /// 类型
         /// </summary>
         [JsonConverter(typeof(JsonStringEnumConverter<FieldType>))]
