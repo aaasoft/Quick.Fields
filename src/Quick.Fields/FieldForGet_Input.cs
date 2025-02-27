@@ -9,10 +9,6 @@ namespace Quick.Fields
         /// </summary>
         public bool? Input_ShowNameLabel { get; set; }
         /// <summary>
-        /// 输入控件的帮助文本，当Type为Input时有效
-        /// </summary>
-        public string Input_HelpText { get; set; }
-        /// <summary>
         /// 输入控件的前置文本，当Type为Input时有效
         /// </summary>
         public string Input_PrependText{get;set;}
