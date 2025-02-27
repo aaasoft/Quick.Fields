@@ -5,6 +5,26 @@ namespace Quick.Fields
     public partial class FieldForGet
     {
         /// <summary>
+        /// 输入控件是否显示名称标签，当Type为Input时有效
+        /// </summary>
+        public bool? Input_ShowNameLabel { get; set; }
+        /// <summary>
+        /// 输入控件的帮助文本，当Type为Input时有效
+        /// </summary>
+        public string Input_HelpText { get; set; }
+        /// <summary>
+        /// 输入控件的前置文本，当Type为Input时有效
+        /// </summary>
+        public string Input_PrependText{get;set;}
+        /// <summary>
+        /// 输入控件的后置文本，当Type为Input时有效
+        /// </summary>
+        public string Input_AppendText{get;set;}
+        /// <summary>
+        /// 输入控件的占位符，当Type为Input时有效
+        /// </summary>
+        public string Input_Placeholder { get; set; }
+        /// <summary>
         /// 输入控件验证用正则表达式，当Type为Input时有效
         /// </summary>
         public string Input_RegularExpression { get; set; }
@@ -29,10 +49,46 @@ namespace Quick.Fields
         /// </summary>
         public bool? Input_IsSmall { get; set; }
         /// <summary>
+        /// 输入控件是否显示纯文本，当Type为Input时有效
+        /// </summary>
+        public bool? Input_IsPlainText { get; set; }
+        /// <summary>
         /// 验证消息
         /// </summary>
         [JsonIgnore]
         public string Input_ValidationMessage { get; private set; }
+
+        private FieldForGet[] _Input_PrependChildren;
+        /// <summary>
+        /// 前置子字段
+        /// </summary>
+        public FieldForGet[] Input_PrependChildren
+        {
+            get { return _Input_PrependChildren; }
+            set
+            {
+                _Input_PrependChildren = value;
+                if (value != null)
+                    foreach (var item in value)
+                        item.Parent = this;
+            }
+        }
+
+        private FieldForGet[] _Input_AppendChildren;
+        /// <summary>
+        /// 后置子字段
+        /// </summary>
+        public FieldForGet[] Input_AppendChildren
+        {
+            get { return _Input_AppendChildren; }
+            set
+            {
+                _Input_AppendChildren = value;
+                if (value != null)
+                    foreach (var item in value)
+                        item.Parent = this;
+            }
+        }
 
         private string validate()
         {

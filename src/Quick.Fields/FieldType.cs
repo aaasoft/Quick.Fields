@@ -11,6 +11,10 @@ namespace Quick.Fields
         /// </summary>
         Button,
         /// <summary>
+        /// 按钮组
+        /// </summary>
+        ButtonGroup,
+        /// <summary>
         /// 消息对话框
         /// </summary>
         MessageBox,
@@ -39,9 +43,9 @@ namespace Quick.Fields
         /// </summary>
         ContainerTab,
         /// <summary>
-        /// 拆分容器控件，子控件为GroupBox类型
+        /// 行容器控件
         /// </summary>
-        ContainerSplit,
+        ContainerRow,
         /// <summary>
         /// 表格容器控件，子控件为ContainerTableHead、ContainerTableBody或者ContainerTableTr类型
         /// </summary>
