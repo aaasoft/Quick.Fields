@@ -5,10 +5,6 @@ namespace Quick.Fields
     public partial class FieldForGet
     {
         /// <summary>
-        /// 输入控件是否显示名称标签，当Type为Input时有效
-        /// </summary>
-        public bool? Input_ShowNameLabel { get; set; }
-        /// <summary>
         /// 输入控件的前置文本，当Type为Input时有效
         /// </summary>
         public string Input_PrependText{get;set;}
