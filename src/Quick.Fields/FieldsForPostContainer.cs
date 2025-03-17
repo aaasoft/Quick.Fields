@@ -7,7 +7,39 @@ namespace Quick.Fields
 {
     public class FieldsForPostContainer
     {
+        /// <summary>
+        /// 请求字段完整编号
+        /// </summary>
+        public string[] FieldIds { get; set; }
+
+        /// <summary>
+        /// Post回来的全部字段数组
+        /// </summary>
         public FieldForPost[] Fields { get; set; }
+
+        /// <summary>
+        /// 字段编号是否匹配
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+
+        public bool IsFieldIdsMatch(params string[] b)
+        {
+            if (FieldIds == null || FieldIds.Length == 0 || b == null || b.Length == 0)
+                return false;
+            if (FieldIds.Length < b.Length)
+                return false;
+            for (var i = 0; i < b.Length; i++)
+            {
+                var c = b[i];
+                //如果是星号通配符，通过
+                if (c == "*")
+                    continue;
+                if (FieldIds[i] != c)
+                    return false;
+            }
+            return true;
+        }
 
         private FieldForPost findField(FieldForPost[] currentFields, string fieldId)
         {
