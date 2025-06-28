@@ -94,7 +94,8 @@ namespace Quick.Fields
                 return;
             foreach (var field in items)
             {
-                if (!string.IsNullOrEmpty(field.Id))
+                if (!string.IsNullOrEmpty(field.Id)
+                    && !jobj.ContainsKey(field.Id))
                 {
                     jobj[field.Id] = field.Value;
                 }
