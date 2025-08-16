@@ -113,6 +113,10 @@ namespace Quick.Fields
         /// <summary>
         /// 选择文件控件
         /// </summary>
-        InputFile
+        InputFile,
+        /// <summary>
+        /// 日期时间输入控件
+        /// </summary>
+        InputDateTime
     }
 }
