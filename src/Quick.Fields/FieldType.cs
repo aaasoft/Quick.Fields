@@ -27,6 +27,18 @@ namespace Quick.Fields
         /// </summary>
         Alert,
         /// <summary>
+        /// 进度条
+        /// </summary>
+        Progress,
+        /// <summary>
+        /// 下载控件
+        /// </summary>
+        Download,
+        /// <summary>
+        /// 上传控件
+        /// </summary>
+        Upload,
+        /// <summary>
         /// 显示图片
         /// </summary>
         Image,

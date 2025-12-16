@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace Quick.Fields
@@ -98,6 +96,14 @@ namespace Quick.Fields
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
             }
         }
+        /// <summary>
+        /// 最大值，当Type为InputNumber、Progress时有效
+        /// </summary>
+        public string MaxValue{get;set;}
+        /// <summary>
+        /// 最小值，当Type为InputNumber、Progress时有效
+        /// </summary>
+        public string MinValue{get;set;}
 
         private FieldForGet[] _Children;
         /// <summary>
