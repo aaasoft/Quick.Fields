@@ -5,5 +5,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Version>1.3.7</Version>
 		<IsAotCompatible>true</IsAotCompatible>
+		<Description>Quick.Fields is a library for descript fields.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 </Project>
