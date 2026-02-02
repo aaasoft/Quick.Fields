@@ -26,12 +26,20 @@ namespace Quick.Fields
         /// <summary>
         /// 主题
         /// </summary>
+        #if NET6_0
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        #else
         [JsonConverter(typeof(JsonStringEnumConverter<FieldTheme>))]
+        #endif
         public FieldTheme? Theme { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
+        #if NET6_0
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        #else
         [JsonConverter(typeof(JsonStringEnumConverter<FieldType>))]
+        #endif
         public FieldType Type { get; set; } = FieldType.InputText;
         /// <summary>
         /// 列宽度
