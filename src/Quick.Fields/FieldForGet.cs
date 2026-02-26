@@ -3,18 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
-    public partial class FieldForGet : INotifyPropertyChanged
+    public partial class FieldForGet : AbstractField<FieldForGet>, INotifyPropertyChanged
     {
-        /// <summary>
-        /// 父节点
-        /// </summary>
-        [JsonIgnore]
-        public FieldForGet Parent { get; set; }
-
-        /// <summary>
-        /// 编号
-        /// </summary>
-        public string Id { get; set; }
         /// <summary>
         /// 名称
         /// </summary>
@@ -94,7 +84,7 @@ namespace Quick.Fields
         /// <summary>
         /// 值
         /// </summary>
-        public string Value
+        public override string Value
         {
             get { return _Value; }
             set
@@ -112,22 +102,6 @@ namespace Quick.Fields
         /// 最小值，当Type为InputNumber、Progress时有效
         /// </summary>
         public string MinValue{get;set;}
-
-        private FieldForGet[] _Children;
-        /// <summary>
-        /// 子字段，当类型为容器时有效
-        /// </summary>
-        public FieldForGet[] Children
-        {
-            get { return _Children; }
-            set
-            {
-                _Children = value;
-                if (value != null)
-                    foreach (var item in value)
-                        item.Parent = this;
-            }
-        }
 
         /// <summary>
         /// 属性改变时
@@ -152,41 +126,6 @@ namespace Quick.Fields
                 return child;
             }).ToArray();
             return model;
-        }
-
-        /// <summary>
-        /// 获取完整的字段
-        /// </summary>
-        /// <returns></returns>
-        public FieldForGet[] GetFullFields()
-        {
-            Stack<FieldForGet> fieldStack = new Stack<FieldForGet>();
-            var currentNode = this;
-            while (currentNode != null)
-            {
-                fieldStack.Push(currentNode);
-                currentNode = currentNode.Parent;
-            }
-            return fieldStack.ToArray();
-        }
-
-        /// <summary>
-        /// 获取完整的字段编号
-        /// </summary>
-        /// <returns></returns>
-        public string[] GetFullFieldIds()
-        {
-            Stack<string> idStack = new Stack<string>();
-            var currentNode = this;
-            while (currentNode != null)
-            {
-                if (!string.IsNullOrEmpty(currentNode.Id))
-                {
-                    idStack.Push(currentNode.Id);
-                }
-                currentNode = currentNode.Parent;
-            }
-            return idStack.ToArray();
         }
     }
 }
