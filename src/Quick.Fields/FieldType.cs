@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Quick.Fields
+﻿namespace Quick.Fields
 {
     public enum FieldType
     {
@@ -130,5 +126,9 @@ namespace Quick.Fields
         /// 上传控件
         /// </summary>
         Upload,
+        /// <summary>
+        /// 勾选框
+        /// </summary>
+        InputCheckbox
     }
 }
