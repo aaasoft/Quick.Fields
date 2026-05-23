@@ -5,8 +5,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Version>2026.3.321</Version>
 		<IsAotCompatible>true</IsAotCompatible>
-		<RepositoryUrl>https://cnb.cool/scbeta/Quick.Fields</RepositoryUrl>
-		<PackageProjectUrl>https://cnb.cool/scbeta/Quick.Fields</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/aaasoft/Quick.Fields</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/aaasoft/Quick.Fields</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Description>Quick.Fields is a library for descript fields.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
