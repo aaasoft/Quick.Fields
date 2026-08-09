@@ -50,11 +50,11 @@ namespace Quick.Fields
         [JsonIgnore]
         public string Input_ValidationMessage { get; private set; }
 
-        private FieldForGet[] _Input_PrependChildren;
+        private List<FieldForGet> _Input_PrependChildren;
         /// <summary>
         /// 前置子字段
         /// </summary>
-        public FieldForGet[] Input_PrependChildren
+        public List<FieldForGet> Input_PrependChildren
         {
             get { return _Input_PrependChildren; }
             set
@@ -66,11 +66,11 @@ namespace Quick.Fields
             }
         }
 
-        private FieldForGet[] _Input_AppendChildren;
+        private List<FieldForGet> _Input_AppendChildren;
         /// <summary>
         /// 后置子字段
         /// </summary>
-        public FieldForGet[] Input_AppendChildren
+        public List<FieldForGet> Input_AppendChildren
         {
             get { return _Input_AppendChildren; }
             set
