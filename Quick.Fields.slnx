@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Quick.Fields.Test/Quick.Fields.Test.csproj" />
+  <Project Path="Quick.Fields/Quick.Fields.csproj" />
+</Solution>
