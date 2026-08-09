@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
@@ -9,7 +7,7 @@ namespace Quick.Fields
         /// <summary>
         /// 选择输入控件的选择项字典
         /// </summary>
-        public IDictionary<string, string> InputSelect_Options { get; set; }
+        public Dictionary<string, string> InputSelect_Options { get; set; }
 
         private void refreshInputSelect_Options_From_Enum()
         {
