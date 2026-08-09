@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -14,9 +13,9 @@ namespace Quick.Fields.AppSettings
     {
         public const string APPSETTINGS_JSON_FILENAME = "appsettings.json";
         public JsonObject Raw { get; private set; }
-        public FieldForGet[] Fields { get; set; }
+        public List<FieldForGet> Fields { get; set; }
 
-        private FieldForGet findField(FieldForGet[] items, string fieldId)
+        private FieldForGet findField(List<FieldForGet> items, string fieldId)
         {
             if (items == null || fieldId == null)
                 return null;
@@ -48,9 +47,9 @@ namespace Quick.Fields.AppSettings
             field.Value = value;
         }
 
-        private void fillJObjectValue(FieldForGet[] items, JsonObject jobj)
+        private void fillJObjectValue(List<FieldForGet> items, JsonObject jobj)
         {
-            if (items == null || items.Length == 0)
+            if (items == null || items.Count == 0)
                 return;
             foreach (var field in items)
             {

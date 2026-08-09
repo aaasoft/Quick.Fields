@@ -124,7 +124,7 @@ namespace Quick.Fields
                 var child = t.ToPost();
                 child.Parent = model;
                 return child;
-            }).ToArray();
+            }).ToList();
             return model;
         }
     }

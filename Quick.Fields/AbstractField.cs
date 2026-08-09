@@ -24,11 +24,11 @@ namespace Quick.Fields
         /// </summary>
         public virtual string Value { get; set; }
 
-        private T[] _Children;
+        private List<T> _Children;
         /// <summary>
         /// 子字段，当类型为容器时有效
         /// </summary>
-        public T[] Children
+        public List<T> Children
         {
             get { return _Children; }
             set

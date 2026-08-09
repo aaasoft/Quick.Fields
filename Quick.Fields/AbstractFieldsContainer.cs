@@ -14,7 +14,7 @@ namespace Quick.Fields
         /// <summary>
         /// 全部字段数组
         /// </summary>
-        public T[] Fields { get; set; }
+        public List<T> Fields { get; set; }
 
         /// <summary>
         /// 字段编号是否匹配
@@ -40,10 +40,10 @@ namespace Quick.Fields
             return true;
         }
 
-        private T findField(T[] currentFields, string fieldId)
+        private T findField(List<T> currentFields, string fieldId)
         {
             if (currentFields == null
-                || currentFields.Length == 0
+                || currentFields.Count == 0
                 || string.IsNullOrEmpty(fieldId))
                 return null;
             var currentField = currentFields.FirstOrDefault(t => fieldId == t.Id);
@@ -87,9 +87,9 @@ namespace Quick.Fields
             return GetField(fieldIds)?.Value;
         }
 
-        private void fillJObjectValue(T[] items, JsonObject jobj)
+        private void fillJObjectValue(List<T> items, JsonObject jobj)
         {
-            if (items == null || items.Length == 0)
+            if (items == null || items.Count == 0)
                 return;
             foreach (var field in items)
             {
