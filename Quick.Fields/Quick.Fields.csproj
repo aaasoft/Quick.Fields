@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Version>2026.4.609</Version>
+		<Version>2026.5.809</Version>
 		<IsAotCompatible>true</IsAotCompatible>
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Fields</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Fields</PackageProjectUrl>
