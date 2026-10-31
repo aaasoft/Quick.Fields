@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Quick.Fields
 {
@@ -23,6 +24,22 @@ namespace Quick.Fields
             {
                 var e = Enum.Parse(type, key);
                 var name = key;
+#pragma warning disable
+                //尝试从Description特性中读取名称
+                try
+                {
+                    var attrs = type.GetMember(key)[0].GetCustomAttributes(false);
+                    foreach (var attr in attrs)
+                    {
+                        if (attr is DescriptionAttribute)
+                        {
+                            name = ((DescriptionAttribute)attr).Description;
+                            break;
+                        }
+                    }
+                }
+                catch { }
+#pragma warning restore
                 var enumKey = key;
                 if (_InputSelect_OptionsEnumIdUseIntValue)
                     enumKey = Convert.ToInt32(e).ToString();
